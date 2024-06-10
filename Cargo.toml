@@ -1,5 +1,5 @@
 [package]
-name = "Solana-API"
+name = "scans-validator-api"
 version = "0.1.0"
 edition = "2021"
 
