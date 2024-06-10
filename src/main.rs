@@ -93,16 +93,19 @@ async fn get_solana(path: web::Path<String>) -> impl Responder {
 async fn main() -> std::io::Result<()> {
     dotenv().ok();
     
-    HttpServer::new(|| {
+    let server = HttpServer::new(|| {
         App::new()
             .service(get_ethereum)
             .service(get_polygon)
             .service(get_bsc)
             .service(get_solana)
     })
-    .bind("127.0.0.1:8080")?
-    .run()
-    .await
+    .bind("0.0.0.0:8080")?
+    .run();
+
+    println!("Listening on port 8080");
+
+    server.await
 }
 
 async fn get_ethereum_transaction(tx_hash: &str, api_key: &str) -> Result<Value, Error> {
